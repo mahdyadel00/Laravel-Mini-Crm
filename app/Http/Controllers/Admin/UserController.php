@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Country;
 use App\Models\Company;
 use App\Models\User;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -32,19 +34,8 @@ class UserController extends Controller
         $companies = Company::get();
         return view('admin.users.create' , compact('companies'));
     }
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        $request->validate([
-
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'phone' => ['required' , 'numeric' , 'min:11'],
-            'password' => ['required'],
-            'pictur' => ['sometimes'],
-            'company_id' => ['required'],
-        ]);
-
         $pictur_in_db = NULL;
         if( $request->has('pictur') )
         {
@@ -86,19 +77,9 @@ class UserController extends Controller
     }
 
 
-    protected function update(Request $request, $id)
+    protected function update(UpdateUserRequest $request, $id)
     {
         $user = User::where('id', $id)->first();
-        // $request->validate([
-
-        //     'first_name' => 'required',
-        //     'last_name' => 'required',
-        //     'email' => 'required|email|unique:users,email',
-        //     'phone' => ['required' , 'numeric' , 'min:11'],
-        //     'pictur' => ['sometimes'],
-        //     'company_id' => ['required'],
-        // ]);
-        // dd($request->all());
 
         $pictur_in_db = NULL;
         if( $request->has('pictur') )

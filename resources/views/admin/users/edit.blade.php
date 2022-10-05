@@ -53,7 +53,7 @@
                                     <div class="col">
                                         <label>Image</label>
                                         <input type="file" class="form-control modal-title" name='pictur'
-                                            accept="image/jpeg,image/jpg,image/png" required>
+                                            accept="image/jpeg,image/jpg,image/png" >
                                             <img src="{{ asset($user->pictur) }}" height="100px" width="100px" />
                                     </div>
                             </div>

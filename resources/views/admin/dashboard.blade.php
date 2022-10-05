@@ -5,11 +5,11 @@
 
 
     <div>
-        <h2>@lang('site.home')</h2>
+        <h2>Home</h2>
     </div>
-    
+
     <ul class="breadcrumb mt-2">
-        <li class="breadcrumb-item">@lang('site.home')</li>
+        <li class="breadcrumb-item">Home</li>
     </ul>
 
 @endsection

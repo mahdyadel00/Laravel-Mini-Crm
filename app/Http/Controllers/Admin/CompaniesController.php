@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Http\Requests\StoreCompanyRequest;
+use App\Http\Requests\UpdateCompanyRequest;
 use Illuminate\Http\Request;
 
 class CompaniesController extends Controller
@@ -19,13 +21,8 @@ class CompaniesController extends Controller
     {
         return view('admin.companies.create');
     }
-    public function store(Request $request)
+    public function store(StoreCompanyRequest $request)
     {
-        $request->validate([
-
-            'name' => 'required',
-            'email' => 'required',
-        ]);
         $logo_in_db = NULL;
         if( $request->has('logo') )
         {
@@ -49,30 +46,19 @@ class CompaniesController extends Controller
         ]);
         return redirect()->route('admin.companies.index')->with('Successfully' , 'company Added Successfully');
     }
-
     public function show($id)
     {
 
     }
-
-
     public function edit($id)
     {
         $company = Company::find($id);
         return view('admin.companies.edit', compact('company'));
     }
-
-
-    public function update(Request $request, $id)
+    public function update(UpdateCompanyRequest $request, $id)
     {
 
         $company = Company::find($id);
-
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-
-        ]);
         $logo_in_db = NULL;
         if ($request->has('logo')) {
             $request->validate([
